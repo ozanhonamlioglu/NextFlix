@@ -15,3 +15,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Nextflix"
 include(":app")
+include(":core")
+include(":core-network")
+include(":core-local")
+include(":home-ui")
+include(":login-ui")
+include(":movie-ui")

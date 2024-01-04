@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "tech.eightbits.nextflix"
-    compileSdk = 34
+    namespace = "${Configuration.appIdDomain}.nextflix"
+    compileSdk = Configuration.compileSdk
 
     defaultConfig {
-        applicationId = "tech.eightbits.nextflix"
-        minSdk = 28
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = "${Configuration.appIdDomain}.nextflix"
+        minSdk = Configuration.minSdk
+        targetSdk = Configuration.targetSdk
+        versionCode = Configuration.versionCode
+        versionName = Configuration.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -50,20 +50,31 @@ android {
 }
 
 dependencies {
+    with(Deps.AndroidX) {
+        implementation(coreKtx)
+        implementation(lifecycleRuntime)
+        implementation(activityCompose)
+    }
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    with(Deps.AndroidX.Compose) {
+        implementation(platform(bom))
+        implementation(ui)
+        implementation(uiGraphics)
+        implementation(uiToolingPreview)
+        implementation(material3)
+    }
+
+    // TESTS
+    testImplementation(Deps.JUnit.junit4)
+    androidTestImplementation(platform(Deps.AndroidX.Compose.bom))
+    with(Deps.AndroidX.Test) {
+        androidTestImplementation(extJunit)
+        androidTestImplementation(espresso)
+    }
+
+    with(Deps.AndroidX.Test.UI) {
+        androidTestImplementation(uiTest)
+        debugImplementation(uiTooling)
+        debugImplementation(testManifest)
+    }
 }
