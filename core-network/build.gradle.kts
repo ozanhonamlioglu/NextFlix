@@ -37,6 +37,8 @@ dependencies {
     implementation(Deps.AndroidX.appCompat)
     implementation(Deps.Google.material)
 
+    implementation(project(Deps.Project.core))
+
     // TEST
     testImplementation(Deps.JUnit.junit4)
     with(Deps.AndroidX.Test) {

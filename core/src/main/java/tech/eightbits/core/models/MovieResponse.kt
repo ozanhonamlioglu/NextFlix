@@ -1,15 +1,10 @@
-package tech.eightbits.core_local.mylist_movie
+package tech.eightbits.core.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
-data class MyListMovieEntity(
-    @PrimaryKey(autoGenerate = false)
-    val id: Int,
-
+data class MovieResponse(
     val adult: Boolean,
     val backdrop_path: String,
+    val genre_ids: List<Int>,
+    val id: Int,
     val original_language: String,
     val original_title: String,
     val overview: String,

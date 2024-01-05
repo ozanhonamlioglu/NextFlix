@@ -1,17 +1,13 @@
-package tech.eightbits.core_local.mylist_tvshows
+package tech.eightbits.core.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
-data class MyListTvShowsEntity(
-    @PrimaryKey(autoGenerate = false)
-    val id: Int,
-
+data class TvShowResponse(
     val adult: Boolean,
     val backdrop_path: String,
     val first_air_date: String,
+    val genre_ids: List<Int>,
+    val id: Int,
     val name: String,
+    val origin_country: List<String>,
     val original_language: String,
     val original_name: String,
     val overview: String,

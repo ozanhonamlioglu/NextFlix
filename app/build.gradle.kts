@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id(Deps.DaggerHilt.plugin)
 }
 
 android {
@@ -71,6 +73,11 @@ dependencies {
         implementation(project(homeUi))
         implementation(project(loginUi))
         implementation(project(movieUi))
+    }
+
+    with(Deps.DaggerHilt) {
+        implementation(hiltAndroid)
+        kapt(hiltCompiler)
     }
 
     // TESTS

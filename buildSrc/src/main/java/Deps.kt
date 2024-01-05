@@ -48,10 +48,19 @@ object Deps {
     }
 
     object Room {
-        private const val room_version = "2.6.1"
-        const val roomRuntime = "androidx.room:room-runtime:$room_version"
-        const val roomCompiler = "androidx.room:room-compiler:$room_version"
-        const val roomKTX = "androidx.room:room-ktx:$room_version"
+        private const val version = "2.6.1"
+        const val roomRuntime = "androidx.room:room-runtime:$version"
+        const val roomCompiler = "androidx.room:room-compiler:$version"
+        const val roomKTX = "androidx.room:room-ktx:$version"
+    }
+
+    object DaggerHilt {
+        const val version = "2.50"
+        const val hiltAndroid = "com.google.dagger:hilt-android:$version"
+        const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
+        const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:1.1.0"
+        const val testing = "com.google.dagger:hilt-android-testing:$version"
+        const val plugin = "com.google.dagger.hilt.android"
     }
 
 }
