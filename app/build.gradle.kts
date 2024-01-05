@@ -64,6 +64,15 @@ dependencies {
         implementation(material3)
     }
 
+    with(Deps.Project) {
+        implementation(project(core))
+        implementation(project(coreLocal))
+        implementation(project(coreNetwork))
+        implementation(project(homeUi))
+        implementation(project(loginUi))
+        implementation(project(movieUi))
+    }
+
     // TESTS
     testImplementation(Deps.JUnit.junit4)
     androidTestImplementation(platform(Deps.AndroidX.Compose.bom))

@@ -47,4 +47,11 @@ object Deps {
         }
     }
 
+    object Room {
+        private const val room_version = "2.6.1"
+        const val roomRuntime = "androidx.room:room-runtime:$room_version"
+        const val roomCompiler = "androidx.room:room-compiler:$room_version"
+        const val roomKTX = "androidx.room:room-ktx:$room_version"
+    }
+
 }

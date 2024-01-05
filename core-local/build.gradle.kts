@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -36,6 +37,12 @@ dependencies {
     implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.AndroidX.appCompat)
     implementation(Deps.Google.material)
+
+    with(Deps.Room) {
+        implementation(roomRuntime)
+        annotationProcessor(roomCompiler)
+        kapt(roomCompiler)
+    }
 
     // TEST
     testImplementation(Deps.JUnit.junit4)
