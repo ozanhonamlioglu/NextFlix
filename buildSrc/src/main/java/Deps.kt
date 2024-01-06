@@ -63,4 +63,11 @@ object Deps {
         const val plugin = "com.google.dagger.hilt.android"
     }
 
+    object Network {
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val gsonConverter = "com.squareup.retrofit2:converter-gson:2.9.0"
+        const val okHttpBom = "com.squareup.okhttp3:okhttp-bom:4.12.0"
+        const val okHttp = "com.squareup.okhttp3:okhttp"
+        const val interceptor = "com.squareup.okhttp3:logging-interceptor"
+    }
 }
