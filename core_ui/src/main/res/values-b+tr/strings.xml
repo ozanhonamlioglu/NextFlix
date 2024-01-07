@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movies">Filmler</string>
+    <string name="tv_shows">Diziler</string>
+    <string name="my_list">Seçtiklerim</string>
+</resources>

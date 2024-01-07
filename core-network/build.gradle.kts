@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "tech.eightbits.core_network"
-    compileSdk = 34
+    namespace = "${Configuration.appIdDomain}.core_network"
+    compileSdk = Configuration.compileSdk
 
     defaultConfig {
-        minSdk = 28
+        minSdk = Configuration.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

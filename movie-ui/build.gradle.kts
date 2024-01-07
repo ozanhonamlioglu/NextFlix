@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "tech.eightbits.movie_ui"
-    compileSdk = 34
+    namespace = "${Configuration.appIdDomain}.movie_ui"
+    compileSdk = Configuration.compileSdk
 
     defaultConfig {
-        minSdk = 28
+        minSdk = Configuration.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

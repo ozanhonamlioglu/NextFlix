@@ -21,6 +21,8 @@ abstract class MovieApi(
         @Query("api_key") apiKey: String = appConfig.getConfigValue(AppConfig.API_KEY)
     ): DataListResponse<MovieResponse>
 
+    abstract suspend fun getMovieById(): MovieResponse
+
     companion object {
         const val Category_Popular = "popular"
         const val Category_Upcoming = "upcoming"

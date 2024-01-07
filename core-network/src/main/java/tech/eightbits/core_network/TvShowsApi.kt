@@ -13,8 +13,6 @@ import tech.eightbits.core.utils.AppConfig
 abstract class TvShowsApi(
     private val appConfig: AppConfig
 ) {
-
-
     @GET("tv/{category}")
     abstract fun getTvShowsByCategory(
         @Path("category") category: String,
@@ -22,6 +20,7 @@ abstract class TvShowsApi(
         @Query("api_key") apiKey: String = appConfig.getConfigValue(AppConfig.API_KEY)
     ): DataListResponse<TvShowResponse>
 
+    abstract fun getTvShowById(): TvShowResponse
 
     companion object {
         const val Category_Airing_Today = "airing_today"

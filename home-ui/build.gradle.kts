@@ -1,14 +1,16 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id(Deps.DaggerHilt.plugin)
 }
 
 android {
-    namespace = "tech.eightbits.home_ui"
-    compileSdk = 34
+    namespace = "${Configuration.appIdDomain}.home_ui"
+    compileSdk = Configuration.compileSdk
 
     defaultConfig {
-        minSdk = 28
+        minSdk = Configuration.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -23,6 +25,12 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -35,7 +43,39 @@ android {
 dependencies {
     implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.AndroidX.appCompat)
+    implementation(Deps.AndroidX.activityCompose)
     implementation(Deps.Google.material)
+
+    with(Deps.AndroidX.LifeCycle) {
+        implementation(viewModel)
+        implementation(viewModelCompose)
+        implementation(lifecycleOnly)
+        implementation(lifecycleCompose)
+        implementation(savedState)
+        kapt(processor)
+    }
+
+    with(Deps.Project) {
+        implementation(project(core))
+        implementation(project(coreLocal))
+        implementation(project(coreNetwork))
+        implementation(project(coreUi))
+    }
+
+    with(Deps.DaggerHilt) {
+        implementation(hiltAndroid)
+        kapt(hiltCompiler)
+    }
+
+    with(Deps.AndroidX.Compose) {
+        implementation(platform(bom))
+        implementation(ui)
+        implementation(uiGraphics)
+        implementation(uiToolingPreview)
+        implementation(material3)
+        implementation(navigation)
+        implementation(extendedIcons)
+    }
 
     // TEST
     testImplementation(Deps.JUnit.junit4)

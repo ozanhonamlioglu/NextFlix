@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "${Configuration.appIdDomain}.login_ui"
+    namespace = "${Configuration.appIdDomain}.core_ui"
     compileSdk = Configuration.compileSdk
 
     defaultConfig {

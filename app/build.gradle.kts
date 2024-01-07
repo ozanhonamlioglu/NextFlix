@@ -54,9 +54,10 @@ android {
 dependencies {
     with(Deps.AndroidX) {
         implementation(coreKtx)
-        implementation(lifecycleRuntime)
         implementation(activityCompose)
     }
+
+    implementation(Deps.AndroidX.LifeCycle.lifecycleOnly)
 
     with(Deps.AndroidX.Compose) {
         implementation(platform(bom))
@@ -64,6 +65,7 @@ dependencies {
         implementation(uiGraphics)
         implementation(uiToolingPreview)
         implementation(material3)
+        implementation(navigation)
     }
 
     with(Deps.Project) {
@@ -73,6 +75,7 @@ dependencies {
         implementation(project(homeUi))
         implementation(project(loginUi))
         implementation(project(movieUi))
+        implementation(project(coreUi))
     }
 
     with(Deps.DaggerHilt) {

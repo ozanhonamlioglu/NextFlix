@@ -10,6 +10,7 @@ object Deps {
         const val homeUi = ":home-ui"
         const val loginUi = ":login-ui"
         const val movieUi = ":movie-ui"
+        const val coreUi = ":core_ui"
     }
 
     object JUnit {
@@ -23,8 +24,19 @@ object Deps {
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:1.6.1"
         const val coreKtx = "androidx.core:core-ktx:1.12.0"
-        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
         const val activityCompose = "androidx.activity:activity-compose:1.8.2"
+
+        object LifeCycle {
+            private const val lifecycle_version = "2.6.2"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+            const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+            const val lifecycleOnly = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+            const val lifecycleCompose = "androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version"
+            const val processor = "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+            const val service = "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+            const val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+        }
 
         object Compose {
             const val ui = "androidx.compose.ui:ui"
@@ -32,6 +44,8 @@ object Deps {
             const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
             const val material3 = "androidx.compose.material3:material3"
             const val bom = "androidx.compose:compose-bom:2023.08.00"
+            const val navigation = "androidx.navigation:navigation-compose:2.7.6"
+            const val extendedIcons = "androidx.compose.material:material-icons-extended"
         }
 
         object Test {
