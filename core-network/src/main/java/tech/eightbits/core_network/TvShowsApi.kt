@@ -10,17 +10,17 @@ import tech.eightbits.core.utils.AppConfig
 /**
  * Created by ozan on 6.01.2024
  */
-abstract class TvShowsApi(
-    private val appConfig: AppConfig
-) {
+interface TvShowsApi {
+    val appConfig: AppConfig
+
     @GET("tv/{category}")
-    abstract fun getTvShowsByCategory(
+    suspend fun getTvShowsByCategory(
         @Path("category") category: String,
         @Query("page") page: Int,
         @Query("api_key") apiKey: String = appConfig.getConfigValue(AppConfig.API_KEY)
     ): DataListResponse<TvShowResponse>
 
-    abstract fun getTvShowById(): TvShowResponse
+    suspend fun getTvShowById(): TvShowResponse
 
     companion object {
         const val Category_Airing_Today = "airing_today"

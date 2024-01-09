@@ -11,17 +11,16 @@ import tech.eightbits.core.utils.AppConfig
  * Created by ozan on 5.01.2024
  */
 
-abstract class MovieApi(
-    private val appConfig: AppConfig
-) {
+interface MovieApi {
+
     @GET("movie/{category}")
-    abstract suspend fun getMovieByCategory(
+    suspend fun getMovieByCategory(
         @Path("category") category: String,
         @Query("page") page: Int,
-        @Query("api_key") apiKey: String = appConfig.getConfigValue(AppConfig.API_KEY)
+        @Query("api_key") apiKey: String
     ): DataListResponse<MovieResponse>
 
-    abstract suspend fun getMovieById(): MovieResponse
+    suspend fun getMovieById(): MovieResponse
 
     companion object {
         const val Category_Popular = "popular"

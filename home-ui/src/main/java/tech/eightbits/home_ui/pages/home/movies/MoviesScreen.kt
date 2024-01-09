@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 
 /**
  * Created by ozan on 8.01.2024
@@ -13,9 +14,12 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun MoviesScreen() {
+    val viewModel = hiltViewModel<MovieViewModel>()
 
     Box(
-        modifier = Modifier.background(Color.Red).fillMaxSize()
+        modifier = Modifier
+            .background(Color.Red)
+            .fillMaxSize()
     ) {
 
     }

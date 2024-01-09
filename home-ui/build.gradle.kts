@@ -46,6 +46,8 @@ dependencies {
     implementation(Deps.AndroidX.activityCompose)
     implementation(Deps.Google.material)
 
+    implementation(Deps.Network.retrofit) // only to be able to use exception models.
+
     with(Deps.AndroidX.LifeCycle) {
         implementation(viewModel)
         implementation(viewModelCompose)
@@ -64,6 +66,7 @@ dependencies {
 
     with(Deps.DaggerHilt) {
         implementation(hiltAndroid)
+        implementation(hiltNavigationCompose)
         kapt(hiltCompiler)
     }
 
