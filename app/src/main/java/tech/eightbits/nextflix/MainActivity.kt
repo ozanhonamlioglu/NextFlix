@@ -6,17 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import tech.eightbits.core.utils.Routes
 import tech.eightbits.home_ui.pages.MainScreen
-import tech.eightbits.home_ui.pages.home.HomeScreen
-import tech.eightbits.nextflix.ui.theme.NextflixTheme
+import tech.eightbits.core_ui.theme.NextflixTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

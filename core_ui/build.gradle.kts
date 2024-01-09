@@ -23,6 +23,12 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -36,6 +42,25 @@ dependencies {
     implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.AndroidX.appCompat)
     implementation(Deps.Google.material)
+
+    with(Deps.Project) {
+        implementation(project(core))
+    }
+
+    with(Deps.AndroidX.Compose) {
+        implementation(platform(bom))
+        implementation(ui)
+        implementation(uiGraphics)
+        implementation(uiToolingPreview)
+        implementation(material3)
+        implementation(navigation)
+    }
+
+    with(Deps.AndroidX.Test.UI) {
+        androidTestImplementation(uiTest)
+        debugImplementation(uiTooling)
+        debugImplementation(testManifest)
+    }
 
     // TEST
     testImplementation(Deps.JUnit.junit4)

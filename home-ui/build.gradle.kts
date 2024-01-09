@@ -77,6 +77,12 @@ dependencies {
         implementation(extendedIcons)
     }
 
+    with(Deps.AndroidX.Test.UI) {
+        androidTestImplementation(uiTest)
+        debugImplementation(uiTooling)
+        debugImplementation(testManifest)
+    }
+
     // TEST
     testImplementation(Deps.JUnit.junit4)
     with(Deps.AndroidX.Test) {
