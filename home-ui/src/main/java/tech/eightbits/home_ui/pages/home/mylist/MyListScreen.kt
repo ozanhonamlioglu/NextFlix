@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 fun MyListScreen() {
 
     Box(
-        modifier = Modifier.background(Color.Green).fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
     }

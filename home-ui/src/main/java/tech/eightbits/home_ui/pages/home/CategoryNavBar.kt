@@ -19,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import tech.eightbits.core.utils.NavEvent
 import tech.eightbits.core.utils.Routes
 import tech.eightbits.core_ui.R
@@ -87,7 +86,7 @@ val tabs = listOf(
     ),
     TopTabNav(
         Routes.HOME_TABS.MY_LIST,
-        R.string.movies
+        R.string.my_list
     )
 )
 

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id(Deps.DaggerHilt.plugin)
+    kotlin("plugin.serialization") version "1.9.21"
 }
 
 android {
@@ -37,6 +38,8 @@ android {
 dependencies {
     implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.AndroidX.appCompat)
+
+    implementation(Deps.Serialization.kotlinx)
 
     with(Deps.DaggerHilt) {
         implementation(hiltAndroid)

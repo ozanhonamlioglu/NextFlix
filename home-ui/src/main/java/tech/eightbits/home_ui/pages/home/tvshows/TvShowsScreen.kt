@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 fun TvShowsScreen() {
 
     Box(
-        modifier = Modifier.background(Color.Blue).fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
     }

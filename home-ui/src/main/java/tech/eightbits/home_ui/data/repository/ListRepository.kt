@@ -2,8 +2,9 @@ package tech.eightbits.home_ui.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
+import kotlinx.serialization.json.Json
 import tech.eightbits.core.models.DataListResponse
+import tech.eightbits.core.models.ErrorResponse
 import tech.eightbits.core.models.MovieResponse
 import tech.eightbits.core.models.TvShowResponse
 import tech.eightbits.core.utils.AppConfig
@@ -30,23 +31,24 @@ class ListRepository @Inject constructor(
 
             emit(UiResponseDto(isLoading = true))
 
-            val response = try {
-                movieApi.getMovieByCategory(category, page, appConfig.getConfigValue(AppConfig.API_KEY))
-            } catch (e: HttpException) {
-                val errorResponse = e.response() as? DataListResponse<MovieResponse>
+            val response = movieApi.getMovieByCategory(
+                category,
+                page,
+                appConfig.getConfigValue(AppConfig.API_KEY)
+            )
+
+            if (!response.isSuccessful) {
+                val errorBody = response.errorBody()?.string()?.let {
+                    Json.decodeFromString<ErrorResponse>(it)
+                }
+
                 emit(
                     UiResponseDto(
-                        isLoading = false,
-                        data = errorResponse
-                    )
-                )
-                return@flow
-            } catch (e: Exception) {
-                emit(
-                    UiResponseDto(
-                        isLoading = false,
                         data = null,
-                        serverError = true
+                        isLoading = false,
+                        success = false,
+                        statusCode = errorBody?.statusCode,
+                        statusMessage = errorBody?.statusMessage
                     )
                 )
                 return@flow
@@ -54,8 +56,8 @@ class ListRepository @Inject constructor(
 
             emit(
                 UiResponseDto(
-                    isLoading = false,
-                    data = response
+                    data = response.body(),
+                    isLoading = false
                 )
             )
 
@@ -67,25 +69,27 @@ class ListRepository @Inject constructor(
         page: Int
     ): Flow<UiResponseDto<DataListResponse<TvShowResponse>>> {
         return flow {
+
             emit(UiResponseDto(isLoading = true))
 
-            val response = try {
-                tvShowsApi.getTvShowsByCategory(category, page)
-            } catch (e: HttpException) {
-                val errorResponse = e.response() as? DataListResponse<TvShowResponse>
+            val response = tvShowsApi.getTvShowsByCategory(
+                category,
+                page,
+                appConfig.getConfigValue(AppConfig.API_KEY)
+            )
+
+            if (!response.isSuccessful) {
+                val errorBody = response.errorBody()?.string()?.let {
+                    Json.decodeFromString<ErrorResponse>(it)
+                }
+
                 emit(
                     UiResponseDto(
-                        isLoading = false,
-                        data = errorResponse
-                    )
-                )
-                return@flow
-            } catch (e: Exception) {
-                emit(
-                    UiResponseDto(
-                        isLoading = false,
                         data = null,
-                        serverError = true
+                        isLoading = false,
+                        success = false,
+                        statusCode = errorBody?.statusCode,
+                        statusMessage = errorBody?.statusMessage
                     )
                 )
                 return@flow
@@ -93,8 +97,8 @@ class ListRepository @Inject constructor(
 
             emit(
                 UiResponseDto(
-                    isLoading = false,
-                    data = response
+                    data = response.body(),
+                    isLoading = false
                 )
             )
 

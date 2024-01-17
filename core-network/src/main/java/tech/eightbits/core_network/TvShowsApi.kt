@@ -1,5 +1,6 @@
 package tech.eightbits.core_network
 
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -11,14 +12,13 @@ import tech.eightbits.core.utils.AppConfig
  * Created by ozan on 6.01.2024
  */
 interface TvShowsApi {
-    val appConfig: AppConfig
 
     @GET("tv/{category}")
     suspend fun getTvShowsByCategory(
         @Path("category") category: String,
         @Query("page") page: Int,
-        @Query("api_key") apiKey: String = appConfig.getConfigValue(AppConfig.API_KEY)
-    ): DataListResponse<TvShowResponse>
+        @Query("api_key") apiKey: String
+    ): Response<DataListResponse<TvShowResponse>>
 
     suspend fun getTvShowById(): TvShowResponse
 

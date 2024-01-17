@@ -84,4 +84,8 @@ object Deps {
         const val okHttp = "com.squareup.okhttp3:okhttp"
         const val interceptor = "com.squareup.okhttp3:logging-interceptor"
     }
+
+    object Serialization {
+        const val kotlinx = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2"
+    }
 }

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id(Deps.DaggerHilt.plugin)
+    kotlin("plugin.serialization") version "1.9.21"
 }
 
 android {
@@ -45,6 +46,8 @@ dependencies {
     implementation(Deps.AndroidX.appCompat)
     implementation(Deps.AndroidX.activityCompose)
     implementation(Deps.Google.material)
+
+    implementation(Deps.Serialization.kotlinx)
 
     implementation(Deps.Network.retrofit) // only to be able to use exception models.
 

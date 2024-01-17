@@ -9,12 +9,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import tech.eightbits.core.utils.Routes
 import tech.eightbits.core_ui.extensions.navigate
 import tech.eightbits.core_ui.theme.NextflixTheme
+import tech.eightbits.home_ui.data.viewmodels.movies.MoviesViewModel
 import tech.eightbits.home_ui.pages.home.movies.MoviesScreen
 import tech.eightbits.home_ui.pages.home.mylist.MyListScreen
 import tech.eightbits.home_ui.pages.home.tvshows.TvShowsScreen
@@ -26,8 +28,9 @@ import tech.eightbits.home_ui.pages.home.tvshows.TvShowsScreen
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen() {
-
     val topNavHostController = rememberNavController()
+
+    val moviesViewModel = hiltViewModel<MoviesViewModel>()
 
     Scaffold(
         topBar = {
@@ -45,7 +48,7 @@ fun HomeScreen() {
         ) {
             NavHost(topNavHostController, startDestination = Routes.HOME_TABS.MOVIES) {
                 composable(Routes.HOME_TABS.MOVIES) {
-                    MoviesScreen()
+                    MoviesScreen(moviesViewModel)
                 }
                 composable(Routes.HOME_TABS.TV_SHOWS) {
                     TvShowsScreen()

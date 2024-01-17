@@ -8,7 +8,5 @@ data class DataListResponse<T>(
     val page: Int,
     val results: List<T>,
     val total_pages: Int,
-    val total_results: Int,
-    val status_code: Int?,
-    val status_message: String?
+    val total_results: Int
 )
