@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import tech.eightbits.core.models.DataListResponse
 import tech.eightbits.core.models.MovieResponse
@@ -27,17 +28,18 @@ class MoviesViewModel @Inject constructor(
     private var _movieListMeta =
         mutableMapOf<String, UiResponseDto<DataListResponse<MovieResponse>>>()
 
-    private val _popularList = MutableStateFlow<List<MovieResponse>>(emptyList())
+    private val _popularList =
+        MutableStateFlow<UiResponseDto<DataListResponse<MovieResponse>>>(UiResponseDto())
     val popularList = _popularList.asStateFlow()
 
-    private val _upComingList = MutableStateFlow<List<MovieResponse>>(emptyList())
-    val upComingList = _upComingList.asStateFlow()
-
-    private val _nowPlaying = MutableStateFlow<List<MovieResponse>>(emptyList())
-    val nowPlaying = _nowPlaying.asStateFlow()
-
-    private val _topRated = MutableStateFlow<List<MovieResponse>>(emptyList())
-    val topRated = _topRated.asStateFlow()
+//    private val _upComingList = MutableStateFlow<List<MovieResponse>>(emptyList())
+//    val upComingList = _upComingList.asStateFlow()
+//
+//    private val _nowPlaying = MutableStateFlow<List<MovieResponse>>(emptyList())
+//    val nowPlaying = _nowPlaying.asStateFlow()
+//
+//    private val _topRated = MutableStateFlow<List<MovieResponse>>(emptyList())
+//    val topRated = _topRated.asStateFlow()
 
     private fun getMovieList(category: String, initial: Boolean) {
         val page = _movieListMeta[category]?.data?.let {
@@ -49,36 +51,18 @@ class MoviesViewModel @Inject constructor(
         viewModelScope.launch {
             listRepository.getMovieListByCategory(category, page)
                 .collectLatest { latest ->
-                    _movieListMeta[category] = latest // update the meta values of the category
+                    _movieListMeta[category] = latest
 
-                    latest.data?.results?.let { newList ->
-
-                        when (category) {
-                            MovieApi.Category_Popular -> {
-                                val copiedData = _popularList.value.toMutableList()
-                                copiedData.addAll(newList)
-                                _popularList.value = copiedData
-                            }
-
-                            MovieApi.Category_Now_Playing -> {
-                                val copiedData = _nowPlaying.value.toMutableList()
-                                copiedData.addAll(newList)
-                                _nowPlaying.value = copiedData
-                            }
-
-                            MovieApi.Category_Top_Rated -> {
-                                val copiedData = _topRated.value.toMutableList()
-                                copiedData.addAll(newList)
-                                _topRated.value = copiedData
-                            }
-
-                            MovieApi.Category_Upcoming -> {
-                                val copiedData = _upComingList.value.toMutableList()
-                                copiedData.addAll(newList)
-                                _upComingList.value = copiedData
-                            }
+                    when (category) {
+                        MovieApi.Category_Popular -> {
+                            _popularList.update { latest }
                         }
 
+                        MovieApi.Category_Now_Playing -> Unit
+
+                        MovieApi.Category_Top_Rated -> Unit
+
+                        MovieApi.Category_Upcoming -> Unit
                     }
                 }
         }
