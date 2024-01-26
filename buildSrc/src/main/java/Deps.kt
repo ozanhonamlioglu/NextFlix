@@ -88,4 +88,8 @@ object Deps {
     object Serialization {
         const val kotlinx = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2"
     }
+
+    object Image {
+        const val coil = "io.coil-kt:coil-compose:2.5.0"
+    }
 }

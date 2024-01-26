@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import tech.eightbits.home_ui.data.viewmodels.movies.MoviesViewModel
+import tech.eightbits.home_ui.pages.home.movies.sections.PopularList
 
 /**
  * Created by ozan on 8.01.2024
@@ -23,4 +24,5 @@ fun MoviesScreen(
         PopularList(moviesViewModel, moviesViewModel::onEvent)
 
     }
+
 }

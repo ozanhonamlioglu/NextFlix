@@ -1,4 +1,4 @@
-package tech.eightbits.home_ui.pages.home.movies
+package tech.eightbits.home_ui.pages.home.movies.sections
 
 import androidx.compose.runtime.Composable
 

@@ -1,16 +1,23 @@
-package tech.eightbits.home_ui.pages.home.movies
+package tech.eightbits.home_ui.pages.home.movies.sections
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
+import tech.eightbits.core_network.Constants
 import tech.eightbits.core_network.MovieApi
 import tech.eightbits.core_ui.utils.UiEvent
 import tech.eightbits.home_ui.components.MagnifyLazyRow
@@ -41,9 +48,16 @@ fun PopularList(
         rowModifier = Modifier
             .fillMaxWidth()
             .height(180.dp),
-        itemContainerModifier = Modifier.background(Color.Black)
-    ) {
-        Text(text = it.id.toString(), color = Color.Red)
+        itemContainerModifier = Modifier
+            .background(color = Color.Transparent, shape = RoundedCornerShape(5.dp))
+            .clip(RoundedCornerShape(5.dp))
+    ) { item, size ->
+        AsyncImage(
+            model = "${Constants.IMAGE_URL}${item.backdrop_path}",
+            contentDescription = item.title,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(size.dp)
+        )
     }
 
 }

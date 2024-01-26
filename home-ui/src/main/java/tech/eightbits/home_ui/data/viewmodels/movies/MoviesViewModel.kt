@@ -55,7 +55,14 @@ class MoviesViewModel @Inject constructor(
 
                     when (category) {
                         MovieApi.Category_Popular -> {
-                            _popularList.update { latest }
+                            _popularList.update {
+                                val data = if(it.data?.results != null)
+                                    it.data!!.results + (latest.data?.results ?: emptyList())
+                                else
+                                    latest.data?.results ?: emptyList()
+
+                                latest.copy(data = latest.data?.copy(results = data))
+                            }
                         }
 
                         MovieApi.Category_Now_Playing -> Unit

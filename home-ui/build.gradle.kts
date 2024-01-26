@@ -51,6 +51,8 @@ dependencies {
 
     implementation(Deps.Network.retrofit) // only to be able to use exception models.
 
+    implementation(Deps.Image.coil)
+
     with(Deps.AndroidX.LifeCycle) {
         implementation(viewModel)
         implementation(viewModelCompose)

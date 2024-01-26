@@ -31,35 +31,47 @@ class ListRepository @Inject constructor(
 
             emit(UiResponseDto(isLoading = true))
 
-            val response = movieApi.getMovieByCategory(
-                category,
-                page,
-                appConfig.getConfigValue(AppConfig.API_KEY)
-            )
+            try {
 
-            if (!response.isSuccessful) {
-                val errorBody = response.errorBody()?.string()?.let {
-                    Json.decodeFromString<ErrorResponse>(it)
+                val response = movieApi.getMovieByCategory(
+                    category,
+                    page,
+                    appConfig.getConfigValue(AppConfig.API_KEY)
+                )
+
+                if (!response.isSuccessful) {
+                    val errorBody = response.errorBody()?.string()?.let {
+                        Json.decodeFromString<ErrorResponse>(it)
+                    }
+
+                    emit(
+                        UiResponseDto(
+                            data = null,
+                            isLoading = false,
+                            success = false,
+                            statusCode = errorBody?.statusCode,
+                            statusMessage = errorBody?.statusMessage
+                        )
+                    )
+                    return@flow
                 }
 
                 emit(
                     UiResponseDto(
-                        data = null,
-                        isLoading = false,
-                        success = false,
-                        statusCode = errorBody?.statusCode,
-                        statusMessage = errorBody?.statusMessage
+                        data = response.body(),
+                        isLoading = false
                     )
                 )
-                return@flow
-            }
 
-            emit(
-                UiResponseDto(
-                    data = response.body(),
-                    isLoading = false
+            } catch (e: Exception) {
+                emit(
+                    UiResponseDto(
+                        isLoading = false,
+                        success = false,
+                        statusMessage = "Check your internet"
+                    )
                 )
-            )
+            }
 
         }
     }

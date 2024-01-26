@@ -1,6 +1,5 @@
 package tech.eightbits.home_ui.components
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -30,7 +29,7 @@ fun <T> MagnifyLazyRow(
     widthOfRow: Int,
     boxMinSize: Float,
     boxMaxSize: Float,
-    itemContent: @Composable (T) -> Unit
+    itemContent: @Composable (T, Float) -> Unit
 ) {
 
     val rowState = LazyListState()
@@ -63,9 +62,9 @@ fun <T> AdaptableBox(
     boxMinSize: Float,
     boxMaxSize: Float,
     containerModifier: Modifier = Modifier,
-    content: @Composable (T) -> Unit
+    content: @Composable (T, Float) -> Unit
 ) {
-    val centerOffsetOfScreen = rememberSaveable {
+    val centerOffsetOfScreen = remember {
         (width / 2).toFloat()
     }
 
@@ -73,7 +72,7 @@ fun <T> AdaptableBox(
         mutableFloatStateOf(0f)
     }
 
-    val boxPosition = rememberSaveable(boxCenterOffset.floatValue) {
+    val boxPosition = rememberSaveable(boxCenterOffset.floatValue, centerOffsetOfScreen) {
         if (boxCenterOffset.floatValue > 0 && boxCenterOffset.floatValue < centerOffsetOfScreen) {
             boxCenterOffset.floatValue
         } else if (boxCenterOffset.floatValue > centerOffsetOfScreen && boxCenterOffset.floatValue < (2 * centerOffsetOfScreen)) {
@@ -90,7 +89,6 @@ fun <T> AdaptableBox(
 
     Box(
         modifier = containerModifier
-            .animateContentSize()
             .size(boxSize.dp)
             .onGloballyPositioned { coords ->
                 with(coords.positionInRoot()) {
@@ -98,9 +96,8 @@ fun <T> AdaptableBox(
                     boxCenterOffset.floatValue = centerOffset
                 }
             },
-        contentAlignment = Alignment.Center
     ) {
-        content(item)
+        content(item, boxSize)
     }
 
 }
