@@ -3,4 +3,5 @@
     <string name="movies">Filmler</string>
     <string name="tv_shows">Diziler</string>
     <string name="my_list">Seçtiklerim</string>
+    <string name="network_fetch_problem">Bağlantı hatası!</string>
 </resources>

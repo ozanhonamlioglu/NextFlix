@@ -25,7 +25,6 @@ fun <T> MagnifyLazyRow(
     rowModifier: Modifier = Modifier,
     itemContainerModifier: Modifier = Modifier,
     items: List<T>,
-    loading: Boolean = false,
     widthOfRow: Int,
     boxMinSize: Float,
     boxMaxSize: Float,

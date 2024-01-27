@@ -34,6 +34,12 @@ fun MainScreen() {
                 composable(Routes.MAIN_TABS.HOME) {
                     HomeScreen()
                 }
+                composable(Routes.MAIN_TABS.PROFILE) {
+                    // HomeScreen()
+                }
+                composable(Routes.MAIN_TABS.SEARCH) {
+                    // HomeScreen()
+                }
             }
         }
     }

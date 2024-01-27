@@ -1,3 +1,3 @@
 <resources>
-    <string name="app_name">Nextflix</string>
+    <string name="app_name" translatable="false">Nextflix</string>
 </resources>
